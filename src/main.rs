@@ -2,10 +2,8 @@ use std::collections::HashMap;
 use std::env;
 use std::fs;
 use std::fs::Metadata;
-use std::ptr::null;
 use chrono::offset::Utc;
 use chrono::DateTime;
-// use std::time::SystemTime;
 
 struct Config {
     flag: String,
@@ -28,7 +26,7 @@ fn main() {
 }
 
 fn parse_args(args: &Vec<String>) -> Config {
-    let mut param_args : Vec<String>;
+    let param_args : Vec<String>;
     if args.len() > 3{
         param_args = args[4..].to_owned();
     } else {
@@ -41,7 +39,7 @@ fn get_object_info(target: &String) ->std::io::Result<()>{
     println!("\nget object info of file {:?}\n", target);
     let object_data : Metadata = fs::metadata("src/files/".to_owned()+target)?;
     let mut object_details : HashMap<String, String> = HashMap::new();
-    let mut object_type: String = String::new();
+    let object_type: String;
 
     if object_data.is_file() {
         object_type = String::from("file");
